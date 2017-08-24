@@ -1,4 +1,4 @@
-/**
+  /**
  * Given the HTML provided, please make the following changes with javascript – don't change any HTML!:
  *
  * USEFUL RESOURCES
@@ -35,8 +35,89 @@
    //code in here wont run until page loads
    $(function(){
 
+     let headerText = $(".panel h1"); //select the h1 element
+     let title = $(".title a");
+     let newString = "";
+     let newStringArray = [];
+
+     //helper function to see if nav links are odd-numbered
+     function isOdd(n) {
+         return Math.abs(n % 2) == 1;
+      }
+
+      //remove odd links from left navigation
+      function removeLinks() {
+        for(let i = 0; i < title.length; i++){
+          newString = title[i].innerHTML;
+          newStringArray[i] = parseInt(newString.replace(/Section /g, ""));
+          if(isOdd(newStringArray[i])){
+            title[i].innerHTML = "";
+          }
+        }
+      }
+
+      //run remove links function
+      //removeLinks();
+
+      //recolor feed template text with click
+     headerText.click(function(){
+        isClicked=$(this).data('clicked');
+        if (isClicked) {
+          isClicked=false;
+        } else {
+          isClicked=true;
+        }
+        $(this).data('clicked',isClicked);
+
+        if(isClicked)
+            {
+            $(this).css("color", "red");
+            }
+        else
+            {
+            $(this).css("color", "black");
+            }
+      }); //end of headertext function
+
+      let pTagFinder = $("p");
+      let pTagString = "";
+      let pTagStringArray = [];
+
+      //remove "Bacon" and replace with "LASER VISION"
+      function removeBacon() {
+        for(let i = 0; i < pTagFinder.length; i++){
+          pTagString = pTagFinder[i].innerHTML;
+          pTagStringArray[i] = pTagString.replace(/Bacon/gi, "LASER VISION");
+          pTagFinder[i].innerHTML = pTagStringArray[i];
+        }
+      }//end of removeBacon() function
+
+      //run removeBacon function;
+      //removeBacon();
+
+      let postFinder = $(".post");
+      let postPosition = postFinder.length - 1; //track post position
+
+      //remove last 2 posts
+      function removeLast2Posts() {
+        for(let i = 0; i < 3; i++){
+          postFinder[postPosition].innerHTML = "";
+          postPosition--;
+        }
+      }
+
+      //run remove last 2 posts
+      //removeLast2Posts();
+
+      let hideImages = $(".hide-for-small img");
+      function removeImages() {
+        hideImages.hide();
+      }
+
+      //run removeImages()
+      //removeImages();
 
 
-   })
+   })//end of ready onload function
 
  })();
